@@ -3,181 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Pendek - Leoraa</title>
+    <title>Website Kenangan Kita</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background: #000; overflow: hidden; }
-
-        .feed {
-            width: 100vw;
-            height: 100vh;
+        /* --- Gaya Dasar & Tema --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: linear-gradient(180deg, #120917 0%, #1e0b24 100%);
+            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            text-align: center;
+            overflow-x: hidden;
             position: relative;
-            transition: transform 0.4s ease-out;
         }
 
-        .video-slide {
-            width: 100%;
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
-
-        video {
+        /* --- Animasi Hati Berguguran --- */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .heart-particle {
+            position: absolute;
+            color: rgba(255, 74, 141, 0.3);
+            font-size: 20px;
+            animation: floatUp 8s linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(105vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
-        .info {
-            position: absolute;
-            bottom: 90px;
-            left: 15px;
-            z-index: 10;
-            color: #fff;
+        /* --- Konten Utama --- */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
-        .info h3 { font-size: 17px; margin-bottom: 6px; }
-        .info p { font-size: 14px; opacity: 0.9; max-width: 85%; }
+        section {
+            margin-bottom: 80px;
+        }
 
-        .actions {
-            position: absolute;
-            bottom: 110px;
-            right: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 22px;
-            align-items: center;
-            z-index: 10;
+        /* --- Bagian Hero / Pembuka --- */
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
         }
-        .btn {
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
+        .highlight {
+            color: #ff4a8d;
+        }
+        .hero p {
+            font-size: 1rem;
+            color: #bfaec6;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        .btn-main {
+            background-color: #ff4a8d;
             border: none;
-            background: rgba(255,255,255,0.18);
-            color: #fff;
-            font-size: 22px;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 74, 141, 0.4);
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-main:hover {
+            background-color: #e03675;
+            transform: translateY(-2px);
+        }
+
+        /* --- Bagian Playlist --- */
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+        .playlist-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .music-card {
+            background: #25132d;
+            border: 1px solid rgba(255, 74, 141, 0.2);
+            border-radius: 15px;
+            padding: 15px 10px;
+            transition: 0.3s;
+        }
+        .music-card.playing {
+            border-color: #ff4a8d;
+            background: #2f173a;
+            box-shadow: 0 0 10px rgba(255, 74, 141, 0.3);
+        }
+        .album-art {
+            background: linear-gradient(135deg, #ff4a8d, #b536e0);
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 12px;
         }
-        .count { font-size: 12px; margin-top: 4px; }
-
-        nav {
-            position: absolute;
-            bottom: 0;
+        .music-card h3 {
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .music-card p {
+            font-size: 0.75rem;
+            color: #bfaec6;
+            margin-bottom: 12px;
+        }
+        .btn-play {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            cursor: pointer;
             width: 100%;
+            transition: 0.2s;
+        }
+        .music-card.playing .btn-play {
+            background: #ff4a8d;
+        }
+
+        /* --- Bagian Cerita --- */
+        .story-card {
+            background: #25132d;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .story-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: #3d2347; /* Placeholder jika gambar belum diisi */
+        }
+        .story-content {
+            padding: 20px;
+        }
+        .story-badge {
+            background: rgba(255, 74, 141, 0.2);
+            color: #ff4a8d;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .story-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        .story-meta {
+            font-size: 0.8rem;
+            color: #bfaec6;
+            margin-bottom: 12px;
+        }
+        .story-content p {
+            font-size: 0.95rem;
+            color: #e2d9e6;
+            line-height: 1.6;
+        }
+
+        /* --- Bagian Jarak / LDR --- */
+        .ldr-container {
+            background: #25132d;
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+        .ldr-title {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .ldr-subtitle {
+            font-size: 0.85rem;
+            color: #bfaec6;
+            margin-bottom: 20px;
+        }
+        .maps-flex {
             display: flex;
             justify-content: space-around;
-            padding: 12px 0;
-            background: rgba(0,0,0,0.7);
-            z-index: 10;
+            gap: 15px;
         }
-        nav button {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 19px;
+        .map-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+            flex: 1;
+        }
+        .map-box span {
+            font-size: 0.8rem;
+            color: #bfaec6;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .map-box strong {
+            color: #ff4a8d;
+            font-size: 1.1rem;
+        }
+        .quote {
+            font-style: italic;
+            font-size: 0.85rem;
+            color: #bfaec6;
+            margin-top: 20px;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            margin-top: 50px;
+            font-size: 0.8rem;
+            color: #715b7a;
         }
     </style>
 </head>
 <body>
 
-<div class="feed" id="feed">
-    <!-- Video 1 -->
-    <div class="video-slide">
-        <video src="video1.mp4" autoplay muted loop playsinline></video>
-        <div class="info">
-            <h3>@akun_saya</h3>
-            <p>Selamat datang di situs video pendek buatan Keyza ✨</p>
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <div class="container">
+        
+        <section class="hero">
+            <h1>Website Kenangan<br><span class="highlight">Untuk Kamu dan Dia.</span></h1>
+            <p>Tempat menyimpan cerita, foto, dan lagu favorit kalian berdua. Semua momen spesial tersimpan di sini.</p>
+            <a href="#cerita" class="btn-main">Lihat Cerita Kita</a>
+        </section>
+
+        <section id="musik">
+            <h2 class="section-title">Lagu Favorit Kita 🎵</h2>
+            <div class="playlist-container">
+                
+                <div class="music-card" id="card1">
+                    <div class="album-art">❤️</div>
+                    <h3>Perfect</h3>
+                    <p>Ed Sheeran</p>
+                    <button class="btn-play" onclick="playMusic('audio1', 'card1')">Play</button>
+                    <audio id="audio1" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio> </div>
+
+                <div class="music-card" id="card2">
+                    <div class="album-art">❤️</div>
+                    <h3>A Thousand Years</h3>
+                    <p>Christina Perri</p>
+                    <button class="btn-play" onclick="playMusic('audio2', 'card2')">Play</button>
+                    <audio id="audio2" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio> 
+                </div>
+
+                <div class="music-card" id="card3">
+                    <div class="album-art">❤️</div>
+                    <h3>All of Me</h3>
+                    <p>John Legend</p>
+                    <button class="btn-play" onclick="playMusic('audio3', 'card3')">Play</button>
+                    <audio id="audio3" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"></audio>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="cerita">
+            <h2 class="section-title">Cerita Kita 💕</h2>
+
+            <div class="story-card">
+                <img src="foto1.jpeg" alt="wajahnya yang cantik" class="story-img">
+                <div class="story-content">
+                    <span class="story-badge">Kenangan #1</span>
+                    <h3>wajahnya yang imut</h3>
+                    <p class="story-meta">📅 24 januari 2025 | 📍 zepeto</p>
+                    <p>Dulu dia hanyalah teman yang tidak ku sukai tetapi semakin berjalan nya waktu aku semakin mengenal nya dan menyukai nya.</p>
+                </div>
+            </div>
+
+            <div class="story-card">
+                <img src="foto2.jpeg" alt="wajahnya yang menyebalkan" class="story-img">
+                <div class="story-content">
+                    <span class="story-badge">Kenangan #2</span>
+                    <h3>first meet</h3>
+                    <p class="story-meta">📅 2 Februari 2025| 📍 tiktok</p>
+                    <p>awal aku semakin dekat denganya di situ dia selalu marah dan menyebalkan tetapi aku tetap menyukai nya.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section>
+            <div class="ldr-container">
+                <h3 class="ldr-title">Walau jauh, aku tetap ngerasa kamu deket</h3>
+                <p class="ldr-subtitle">Jarak hanya angka, yang penting hati kita selalu terhubung 💫</p>
+                
+                <div class="maps-flex">
+                    <div class="map-box">
+                        <span>You</span>
+                        <strong>Di Sana 🌸</strong>
+                    </div>
+                    <div class="map-box">
+                        <span>Me</span>
+                        <strong>Di Sini 💖</strong>
+                    </div>
+                </div>
+
+                <p class="quote">"Distance means so little when someone means so much"</p>
+            </div>
+        </section>
+
+        <div class="footer">
+            <p>Setiap kenangan kita tersimpan di sini, selamanya.</p>
+            <p style="margin-top: 5px; font-size: 0.7rem;">Made with ❤️ for us</p>
         </div>
-        <div class="actions">
-            <div><button class="btn">❤️</button><div class="count">15,2rb</div></div>
-            <div><button class="btn">💬</button><div class="count">1.203</div></div>
-            <div><button class="btn">↗️</button><div class="count">421</div></div>
-        </div>
+
     </div>
 
-    <!-- Video 2 -->
-    <div class="video-slide">
-        <video src="video2.mp4" muted loop playsinline></video>
-        <div class="info">
-            <h3>@konten_seru</h3>
-            <p>Geser layar ke atas/bawah untuk ganti video ⬆️⬇️</p>
-        </div>
-        <div class="actions">
-            <div><button class="btn">❤️</button><div class="count">9,8rb</div></div>
-            <div><button class="btn">💬</button><div class="count">675</div></div>
-            <div><button class="btn">↗️</button><div class="count">210</div></div>
-        </div>
-    </div>
+    <script>
+        // 1. Fungsi Pemutar Musik (Hanya satu musik yang bisa berputar dalam satu waktu)
+        let currentAudio = null;
+        let currentCard = null;
 
-    <!-- Video 3 -->
-    <div class="video-slide">
-        <video src="video3.mp4" muted loop playsinline></video>
-        <div class="info">
-            <h3>@karya_kamu</h3>
-            <p>Bisa ditambah video lain sesuai keinginanmu 🚀</p>
-        </div>
-        <div class="actions">
-            <div><button class="btn">❤️</button><div class="count">22rb</div></div>
-            <div><button class="btn">💬</button><div class="count">2.150</div></div>
-            <div><button class="btn">↗️</button><div class="count">930</div></div>
-        </div>
-    </div>
-</div>
+        function playMusic(audioId, cardId) {
+            const audio = document.getElementById(audioId);
+            const card = document.getElementById(cardId);
+            const button = card.querySelector('.btn-play');
 
-<nav>
-    <button>🏠</button>
-    <button>🔍</button>
-    <button>➕</button>
-    <button>📩</button>
-    <button>👤</button>
-</nav>
-
-<script>
-    const feed = document.getElementById('feed');
-    const slides = document.querySelectorAll('.video-slide');
-    let currentIndex = 0;
-    let startY = 0;
-    let isSwiping = false;
-
-    feed.addEventListener('touchstart', (e) => {
-        startY = e.touches[0].clientY;
-        isSwiping = true;
-    });
-
-    feed.addEventListener('touchend', (e) => {
-        if (!isSwiping) return;
-        isSwiping = false;
-        const endY = e.changedTouches[0].clientY;
-        const diffY = startY - endY;
-
-        if (Math.abs(diffY) > 60) {
-            if (diffY > 0 && currentIndex < slides.length - 1) {
-                currentIndex++;
-            } else if (diffY < 0 && currentIndex > 0) {
-                currentIndex--;
+            // Jika musik yang diklik sedang berputar, maka pause
+            if (currentAudio === audio) {
+                if (audio.paused) {
+                    audio.play();
+                    button.innerText = "Playing...";
+                    card.classList.add('playing');
+                } else {
+                    audio.pause();
+                    button.innerText = "Play";
+                    card.classList.remove('playing');
+                }
+                return;
             }
-            updatePosition();
-            playCurrentVideo();
+
+            // Matikan musik sebelumnya jika ada yang sedang berputar
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                currentCard.classList.remove('playing');
+                currentCard.querySelector('.btn-play').innerText = "Play";
+            }
+
+            // Putar musik baru
+            audio.play().then(() => {
+                button.innerText = "Playing...";
+                card.classList.add('playing');
+                currentAudio = audio;
+                currentCard = card;
+            }).catch(error => {
+                alert("Klik sekali lagi untuk memutar lagu ya!");
+            });
         }
-    });
 
-    function updatePosition() {
-        feed.style.transform = `translateY(-${currentIndex * 100}vh)`;
-    }
+        // 2. Generator Efek Hati Berguguran Otomatis
+        const heartsBg = document.getElementById('heartsBg');
+        const heartSymbols = ['❤️', '💖', '💕', '🌸', '✨'];
 
-    function playCurrentVideo() {
-        slides.forEach((slide, idx) => {
-            const vid = slide.querySelector('video');
-            idx === currentIndex ? vid.play() : vid.pause();
-        });
-    }
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            
+            // Atur simbol acak
+            heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            
+            // Atur posisi horizontal acak
+            heart.style.left = Math.random() * 100 + 'vw';
+            
+            // Atur ukuran acak
+            heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            
+            // Atur durasi animasi acak agar alami
+            heart.style.animationDuration = (Math.random() * 4 + 5) + 's';
+            
+            heartsBg.appendChild(heart);
 
-    playCurrentVideo();
-</script>
+            // Hapus elemen setelah animasi selesai agar web tidak berat
+            setTimeout(() => {
+                heart.remove();
+            }, 9000);
+        }
 
+        // Membuat hati baru setiap 400 milidetik
+        setInterval(createHeart, 400);
+    </script>
 </body>
-      </html>
-      
+</html>
