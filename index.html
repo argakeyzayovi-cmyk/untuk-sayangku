@@ -20,44 +20,6 @@
             position: relative;
         }
 
-        /* --- Kotak Pesan Notifikasi --- */
-        .pesan {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(30, 20, 35, 0.96);
-            padding: 28px;
-            border-radius: 18px;
-            width: 90%;
-            max-width: 340px;
-            z-index: 999;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-        }
-        .pesan h4 {
-            font-size: 18px;
-            margin-bottom: 12px;
-            text-align: left;
-            font-weight: 600;
-        }
-        .pesan p {
-            font-size: 15px;
-            opacity: 0.9;
-            margin-bottom: 20px;
-            text-align: left;
-            line-height: 1.5;
-        }
-        .tombol-oke {
-            text-align: right;
-            border: none;
-            background: none;
-            color: #ffb3b3;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
         /* --- Animasi Hati Berguguran --- */
         .hearts-bg {
             position: fixed;
@@ -282,13 +244,6 @@
 </head>
 <body>
 
-    <!-- Kotak Pesan Notifikasi -->
-    <div class="pesan" id="kotakPesan">
-        <h4>argakeyzayovi-cmyk.github.io menyatakan</h4>
-        <p>Klik sekali lagi untuk memutar lagu ya!</p>
-        <button class="tombol-oke" onclick="tutupPesan()">Oke</button>
-    </div>
-
     <div class="hearts-bg" id="heartsBg"></div>
 
     <div class="container">
@@ -308,15 +263,14 @@
                     <h3>Perfect</h3>
                     <p>Ed Sheeran</p>
                     <button class="btn-play" onclick="playMusic('audio1', 'card1')">Play</button>
-                    <audio id="audio1" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" preload="auto" loop>
-                </div>
+                    <audio id="audio1" src="https://www.soundhelix.com/examples/mp3/soundhelix-song-2.mp3"></audio> </div>
 
                 <div class="music-card" id="card2">
                     <div class="album-art">❤️</div>
                     <h3>A Thousand Years</h3>
                     <p>Christina Perri</p>
                     <button class="btn-play" onclick="playMusic('audio2', 'card2')">Play</button>
-                    <audio id="audio2" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" preload="auto" loop>
+                    <audio id="audio2" src="https://www.soundhelix.com/examples/mp3/soundhelix-song-2.mp3"></audio> 
                 </div>
 
                 <div class="music-card" id="card3">
@@ -324,7 +278,7 @@
                     <h3>All of Me</h3>
                     <p>John Legend</p>
                     <button class="btn-play" onclick="playMusic('audio3', 'card3')">Play</button>
-                    <audio id="audio3" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" preload="auto" loop>
+                    <audio id="audio3" src="https://www.soundhelix.com/examples/mp3/soundhelix-song-2.mp3"></audio>
                 </div>
 
             </div>
@@ -414,16 +368,7 @@
     </div>
 
     <script>
-        // Tampilkan pesan saat halaman terbuka
-        window.onload = () => {
-            document.getElementById('kotakPesan').style.display = "block";
-        };
-
-        function tutupPesan() {
-            document.getElementById('kotakPesan').style.display = "none";
-        }
-
-        // 1. Fungsi Pemutar Musik
+        // 1. Fungsi Pemutar Musik (Hanya satu musik yang bisa berputar dalam satu waktu)
         let currentAudio = null;
         let currentCard = null;
 
@@ -432,59 +377,68 @@
             const card = document.getElementById(cardId);
             const button = card.querySelector('.btn-play');
 
-            // Jika musik yang sama diklik
+            // Jika musik yang diklik sedang berputar, maka pause
             if (currentAudio === audio) {
                 if (audio.paused) {
-                    audio.play()
-                        .then(() => {
-                            button.innerText = "⏸️ Jeda";
-                            card.classList.add('playing');
-                        })
-                        .catch(err => alert("Klik sekali lagi untuk memutar lagu ya!"));
+                    audio.play();
+                    button.innerText = "Playing...";
+                    card.classList.add('playing');
                 } else {
                     audio.pause();
-                    button.innerText = "▶️ Play";
+                    button.innerText = "Play";
                     card.classList.remove('playing');
                 }
                 return;
             }
 
-            // Matikan musik yang sedang berjalan
+            // Matikan musik sebelumnya jika ada yang sedang berputar
             if (currentAudio) {
                 currentAudio.pause();
                 currentAudio.currentTime = 0;
                 currentCard.classList.remove('playing');
-                currentCard.querySelector('.btn-play').innerText = "▶️ Play";
+                currentCard.querySelector('.btn-play').innerText = "Play";
             }
 
             // Putar musik baru
-            audio.play()
-                .then(() => {
-                    button.innerText = "⏸️ Jeda";
-                    card.classList.add('playing');
-                    currentAudio = audio;
-                    currentCard = card;
-                })
-                .catch(err => {
-                    alert("Klik sekali lagi untuk memutar lagu ya!");
-                });
+            audio.play().then(() => {
+                button.innerText = "Playing...";
+                card.classList.add('playing');
+                currentAudio = audio;
+                currentCard = card;
+            }).catch(error => {
+                alert("Klik sekali lagi untuk memutar lagu ya!");
+            });
         }
 
-        // 2. Efek Hati Berguguran
+        // 2. Generator Efek Hati Berguguran Otomatis
         const heartsBg = document.getElementById('heartsBg');
         const heartSymbols = ['❤️', '💖', '💕', '🌸', '✨'];
 
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart-particle');
+            
+            // Atur simbol acak
             heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            
+            // Atur posisi horizontal acak
             heart.style.left = Math.random() * 100 + 'vw';
+            
+            // Atur ukuran acak
             heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            
+            // Atur durasi animasi acak agar alami
             heart.style.animationDuration = (Math.random() * 4 + 5) + 's';
+            
             heartsBg.appendChild(heart);
-            setTimeout(() => heart.remove(), 9000);
+
+            // Hapus elemen setelah animasi selesai agar web tidak berat
+            setTimeout(() => {
+                heart.remove();
+            }, 9000);
         }
 
+        // Membuat hati baru setiap 400 milidetik
         setInterval(createHeart, 400);
     </script>
 </body>
