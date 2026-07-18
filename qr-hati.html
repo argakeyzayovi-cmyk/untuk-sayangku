@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💖 QR Keyla 💖</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+        body{background:#FFE6F2;min-height:100vh;display:flex;align-items:center;justify-content:center}
+        .wadah{text-align:center}
+        .bingkai-hati{
+            width:320px;height:320px;
+            background:#FF3E78;
+            border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+            transform:rotate(0deg);
+            display:flex;align-items:center;justify-content:center;
+            margin:0 auto 20px;
+            box-shadow:0 0 30px rgba(255,62,120,0.4)
+        }
+        #qrcanvas{background:white;padding:15px;border-radius:8px}
+        .keterangan{color:#FF3E78;font-weight:bold;font-size:18px}
+    </style>
+</head>
+<body>
+<div class="wadah">
+    <div class="bingkai-hati">
+        <canvas id="qrcanvas"></canvas>
+    </div>
+    <p class="keterangan">💝 Scan untuk kejutan spesial 💝</p>
+</div>
+
+<script>
+// 👇 HANYA UBAH BAGIAN INI SAJA YA 👇
+const linkTujuan = "https://argakeyzayovi-cmyk.github.io/untuk-sayangku/";
+// ☝️ Ganti alamat di atas dengan link tempat kamu simpan halaman ulang tahun tadi ☝️
+
+QRCode.toCanvas(document.getElementById('qrcanvas'), linkTujuan, {
+    width: 220, margin:1, color:{dark:'#FF3E78', light:'#ffffff'}
+});
+</script>
+</body>
+</html>
