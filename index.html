@@ -3,423 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎉 SELAMAT ULANG TAHUN SAYANGKU 🎉</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        utama: '#FF3E78',
-                        pinkbg: '#FFC8DD',
-                        pudar: '#FFE6F2',
-                        emas: '#FFD700',
-                    },
-                    fontFamily: {
-                        tulisan: ['"Segoe Script"', 'cursive', 'sans-serif'],
-                        biasa: ['"Segoe UI"', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .teks-3d { text-shadow: 2px 2px 0 #FF3E78, 3px 3px 6px rgba(0,0,0,0.15); }
-            .bayang { box-shadow: 0 0 25px rgba(255,62,120,0.25); }
-            .bercahaya { animation: cahaya 2.5s ease-in-out infinite alternate; }
-            .gerak-lambat { animation: naikTurun 3s ease-in-out infinite; }
-            .muncul-anim { animation: muncul 1s ease-out forwards; opacity: 0; }
-            .kado-terbuka { transform: scale(0); opacity: 0; transition: all 0.5s ease; }
-            .isi-kado { transform: translateY(50px); opacity: 0; transition: all 0.6s ease forwards; }
-            .isi-muncul { transform: translateY(0); opacity: 1; }
-            .hilang-layar { opacity:0; transform: scale(1.15); transition: all 0.8s ease forwards; }
-            .lengkap { animation: detak 0.6s ease-in-out infinite alternate; }
-            .ketik { border-right: 2px solid #FF3E78; animation: kedipKursor 0.8s infinite; word-break: break-word; white-space: pre-wrap; line-height: 1.8; }
-            .cabang { transform: scaleY(0); transform-origin: bottom; transition: all 1s ease-out; }
-            .tumbuh { transform: scaleY(1); }
-            .daun { opacity:0; transform: scale(0); transition: all 0.8s ease-out 0.4s; }
-            .muncul-daun { opacity:1; transform: scale(1); }
-            .jatuh { animation: jatuhHati linear forwards; cursor: pointer; user-select: none; }
-            .bingkai-foto { border: 5px solid #FFD700; border-radius: 20px; overflow: hidden; background: white; }
-        }
+    <title>Jasa & Keahlian TKJ | Layanan Cepat & Terpercaya</title>
+    <style>
+        *{margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;}
+        :root{--biru:#0F4C81; --biru-muda:#4A90E2; --putih:#fff; --abu:#f4f4f4; --teks:#333; --emas:#FFB800;}
+        body{background:linear-gradient(120deg,#eef2f5,#d9e2ec); color:var(--teks); line-height:1.6;}
+        header{background:linear-gradient(135deg,var(--biru),var(--biru-muda)); color:var(--putih); padding:2rem 1rem; text-align:center; position:relative; overflow:hidden;}
+        header h1{font-size:2rem; margin-bottom:.5rem; animation:muncul 1s ease-out;}
+        header p{font-size:1.1rem; opacity:.9; animation:muncul 1.2s ease-out;}
+        .gelombang{position:absolute; bottom:0; left:0; width:100%; height:60px; background:url('data:image/svg+xml;utf8,<svg viewBox=\"0 0 1200 120\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.11,126.84,141.14,200,120c48.28-13.84,90.43-46.36,121.39-63.56Z\" fill=\"%23ffffff\"></path></svg>') no-repeat center; background-size:cover;}
+        .container{max-width:1100px; margin:0 auto; padding:2rem 1rem;}
+        section{margin-bottom:3rem;}
+        h2{text-align:center; color:var(--biru); font-size:1.8rem; margin-bottom:2rem; position:relative;}
+        h2::after{content:''; width:80px; height:4px; background:var(--emas); position:absolute; bottom:-8px; left:50%; transform:translateX(-50%); border-radius:2px;}
 
-        @keyframes cahaya {
-            from { filter: drop-shadow(0 0 5px #FFD700); }
-            to { filter: drop-shadow(0 0 12px #FFD700) drop-shadow(0 0 20px #FF3E78); }
-        }
-        @keyframes naikTurun {
-            0%,100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
-        }
-        @keyframes muncul {
-            0% { transform: translateY(25px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes kedip {0%,100%{opacity:1}50%{opacity:0.3}}
-        @keyframes kedipKursor {50%{border-color:transparent}}
-        @keyframes detak {0%{transform:scale(1)}100%{transform:scale(1.15)}}
-        @keyframes hujanHati {0%{transform:translateY(-10vh) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
-        @keyframes jatuhHati {
-            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(320px) rotate(360deg); opacity: 0.7; }
-        }
-        @keyframes ambil {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(2); opacity: 0; }
-        }
+        /* Tentang */
+        .tentang{background:var(--putih); padding:2rem; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,.08); text-align:center;}
+        .tentang p{max-width:700px; margin:0 auto; font-size:1.05rem;}
 
-        body {
-            background: #FFC8DD;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffb3c6' fill-opacity='0.4'%3E%3Cpath d='M30 30c0-8.284-6.716-15-15-15S0 21.716 0 30s6.716 15 15 15 15-6.716 15-15zm30 0c0-8.284-6.716-15-15-15S30 21.716 30 30s6.716 15 15 15 15-6.716 15-15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
+        /* Layanan */
+        .grid-layanan{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem;}
+        .kartu{background:var(--putih); border-radius:14px; padding:1.8rem; box-shadow:0 6px 16px rgba(0,0,0,.08); transition:all .3s ease; border-top:4px solid var(--biru-muda); cursor:pointer;}
+        .kartu:hover{transform:translateY(-8px); box-shadow:0 10px 25px rgba(15,76,129,.15); border-top-color:var(--emas);}
+        .kartu h3{color:var(--biru); margin-bottom:.8rem; font-size:1.2rem;}
+        .kartu .ikon{font-size:2.2rem; margin-bottom:.5rem;}
+        .harga{display:inline-block; margin-top:.8rem; background:var(--emas); color:#222; padding:.3rem .8rem; border-radius:20px; font-weight:bold; font-size:.95rem;}
 
-        .hiasan-hati {
-            position: absolute;
-            animation: melayang 14s ease-in-out infinite;
-            opacity: 0.5;
-            color: #FF3E78;
+        /* Keahlian TKJ */
+        .keahlian{background:var(--putih); border-radius:16px; padding:2rem; box-shadow:0 4px 12px rgba(0,0,0,.08); text-align:center;}
+        .daftar-keahlian{margin-top:1.5rem;}
+        .skill{background:linear-gradient(135deg,#eaf4ff,#dcecf9); padding:1.2rem 2rem; border-radius:10px; display:inline-block; font-weight:600; font-size:1.1rem; color:var(--biru);}
+
+        /* Cara Pesan */
+        .langkah{display:flex; flex-direction:column; gap:1rem; margin-top:1rem;}
+        .langkah div{background:var(--putih); padding:1rem; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,.06);}
+        .langkah span{display:inline-block; width:30px; height:30px; line-height:30px; text-align:center; background:var(--biru); color:#fff; border-radius:50%; margin-right:.8rem; font-weight:bold;}
+
+        /* Kontak */
+        .kotak-kontak{background:linear-gradient(135deg,var(--biru),var(--biru-muda)); color:#fff; padding:2rem; border-radius:16px; text-align:center;}
+        .kotak-kontak a{display:inline-block; background:#25D366; color:#fff; padding:.8rem 1.8rem; border-radius:30px; text-decoration:none; font-weight:bold; margin-top:1rem; transition:.3s;}
+        .kotak-kontak a:hover{background:#1fb958; transform:scale(1.05);}
+
+        footer{text-align:center; padding:1.2rem; color:#555; font-size:.95rem; margin-top:2rem;}
+
+        @keyframes muncul{from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);}}
+
+        /* Responsif HP */
+        @media(max-width:600px){
+            header h1{font-size:1.5rem;}
+            h2{font-size:1.4rem;}
         }
-        @keyframes melayang {
-            0% { transform: translateY(100vh) rotate(0deg); }
-            100% { transform: translateY(-80px) rotate(360deg); }
-        }
-        .hujan { position: fixed; top:0; font-size: 24px; animation: hujanHati linear forwards; pointer-events: none; z-index:99; }
     </style>
 </head>
-<body class="min-h-screen overflow-x-hidden font-biasa">
-    <div id="lapisan-hiasan" class="fixed inset-0 z-0 pointer-events-none"></div>
-    <div id="wadah-hujan" class="fixed inset-0 z-40 pointer-events-none"></div>
+<body>
 
-    <div id="layar-intro" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-pudar/95 to-utama/90 backdrop-blur-md">
-        <div class="text-center px-6">
-            <div class="flex justify-center items-center gap-2 mb-4">
-                <span class="text-5xl gerak-lambat">💖</span>
-                <span class="text-6xl gerak-lambat" style="animation-delay:0.2s">💝</span>
-                <span class="text-5xl gerak-lambat" style="animation-delay:0.4s">💖</span>
+<header>
+    <h1>🔧 Jasa & Keahlian TKJ</h1>
+    <p>Layanan Pengetikan • Pembuatan Dokumen • Jaringan & Komputer</p>
+    <div class="gelombang"></div>
+</header>
+
+<div class="container">
+
+    <!-- Tentang Kami -->
+    <section class="tentang">
+        <h2>Tentang Kami</h2>
+        <p>Kami adalah kelompok lulusan jurusan <strong>TKJ (Teknik Komputer dan Jaringan)</strong>, siap membantu Anda dengan berbagai kebutuhan dokumen dan pekerjaan teknis komputer. Cepat, rapi, teliti, dan harga terjangkau! 💻✨</p>
+    </section>
+
+    <!-- Layanan Jasa -->
+    <section>
+        <h2>📝 Layanan Pengetikan & Dokumen</h2>
+        <div class="grid-layanan">
+            <div class="kartu">
+                <div class="ikon">📄</div>
+                <h3>Pengetikan Umum</h3>
+                <p>Ketik ulang tulisan tangan, foto, PDF ke Word/Excel. Rapi dan sesuai format.</p>
+                <span class="harga">Mulai Rp 5.000/halaman</span>
             </div>
-            <h2 class="text-[clamp(1.8rem,6vw,2.8rem)] font-bold text-white font-tulisan teks-3d mb-2">Ada Sesuatu Spesial</h2>
-            <h3 class="text-[clamp(1.5rem,5vw,2.2rem)] font-bold text-emas font-tulisan bercahaya mb-8">Untuk Keyla 💖</h3>
-            <button id="tombol-mulai" class="bg-white text-utama font-bold py-4 px-10 rounded-full text-xl shadow-xl transform transition-all duration-500 hover:scale-110">
-                <i class="fa fa-heart mr-2"></i> Mulai Lihat Ucapannya <i class="fa fa-gift ml-2"></i>
-            </button>
-            <p class="mt-6 text-white/80 text-sm">Tekan tombol di atas ya sayangku ✨</p>
-        </div>
-    </div>
-
-    <div id="isi-utama" class="relative z-10 min-h-screen flex flex-col items-center justify-start px-4 py-12 opacity-0">
-        
-        <div class="mb-4 muncul-anim" style="animation-delay:0.15s">
-            <h1 class="text-[clamp(2.5rem,8vw,4rem)] font-extrabold text-white teks-3d text-center uppercase tracking-wider leading-tight">SELAMAT DATANG USIA 17!</h1>
-            <h2 class="text-[clamp(2rem,7vw,3rem)] font-bold text-utama font-tulisan text-center mt-2">✨ KEYLA SAYANGKU ✨</h2>
-        </div>
-
-        <div id="wadah-ucapan" class="w-full max-w-xl mb-8 muncul-anim" style="animation-delay:1s">
-            <p class="text-center text-white font-semibold mb-6 text-lg">👉 Tekan setiap kado untuk membaca doa dan harapanku ya 🎁</p>
-            <div class="space-y-5">
-                <div class="relative">
-                    <div class="kotak-kado bg-white/88 rounded-2xl p-6 bayang border-4 border-utama text-center cursor-pointer" onclick="bukaKado(this)">
-                        <span class="text-5xl">🎁</span>
-                        <p class="font-bold text-utama mt-2">Klik untuk ucapan selamat!</p>
-                    </div>
-                    <div class="isi-kado bg-white/88 rounded-2xl p-6 bayang border-4 border-utama text-center hidden">
-                        <p class="text-utama font-bold text-xl mb-3">Hai Keyla kesayanganku 💖</p>
-                        <p class="text-gray-800">Selamat ulang tahun yang ke-17 ya sayangku! Hari ini kamu resmi memasuki usia yang sangat istimewa... Sungguh bahagia sekali rasanya bisa melihatmu tumbuh menjadi gadis yang cantik, sopan, tangguh, dan selalu berhati lembut 🥀</p>
-                    </div>
-                </div>
-                <div class="relative">
-                    <div class="kotak-kado bg-white/88 rounded-2xl p-6 bayang border-4 border-pudar text-center cursor-pointer" onclick="bukaKado(this)">
-                        <span class="text-5xl">🎁</span>
-                        <p class="font-bold text-pink-600 mt-2">Klik untuk doa kemudahan!</p>
-                    </div>
-                    <div class="isi-kado bg-white/88 rounded-2xl p-6 bayang border-4 border-pudar text-center hidden">
-                        <p class="text-pink-600 font-bold text-xl mb-3">Untuk kemudahanmu 🤲</p>
-                        <p class="text-gray-800">Semoga Allah SWT senantiasa memberikanmu <strong class="text-utama">KEMUDAHAN</strong> di setiap langkah. Semoga segala urusan, cita-citamu selalu diperlancarkan dan diberi hasil terindah 🤲</p>
-                    </div>
-                </div>
-                <div class="relative">
-                    <div class="kotak-kado bg-white/88 rounded-2xl p-6 bayang border-4 border-emas text-center cursor-pointer" onclick="bukaKado(this)">
-                        <span class="text-5xl">🎁</span>
-                        <p class="font-bold text-yellow-600 mt-2">Klik untuk doa kesabaran!</p>
-                    </div>
-                    <div class="isi-kado bg-white/88 rounded-2xl p-6 bayang border-4 border-emas text-center hidden">
-                        <p class="text-utama font-bold text-xl mb-3">Untuk kesabaranmu 💪</p>
-                        <p class="text-gray-800">Semoga Allah selalu memberimu <strong class="text-utama">KESABARAN YANG LUAR BIASA</strong>. Saat ada hal tak sesuai harapan, semoga hatimu tetap tenang dan kamu selalu kuat dengan senyumanmu yang indah 💪🤍</p>
-                    </div>
-                </div>
-                <div class="relative">
-                    <div class="kotak-kado bg-white/88 rounded-2xl p-6 bayang border-4 border-pink-400 text-center cursor-pointer" onclick="bukaKado(this)">
-                        <span class="text-5xl">🎁</span>
-                        <p class="font-bold text-pink-500 mt-2">Klik untuk pesan terakhir!</p>
-                    </div>
-                    <div class="isi-kado bg-white/88 rounded-2xl p-6 bayang border-4 border-pink-400 text-center hidden">
-                        <p class="text-pink-500 font-bold text-xl mb-3">Satu hal yang harus kamu tahu 💖</p>
-                        <p class="text-gray-800">Tetaplah menjadi dirimu sendiri ya Keyla. Ingatlah bahwa kamu adalah orang paling berharga dan spesial yang pernah ada di hidupku 🎁💝</p>
-                        <p class="text-right font-tulisan text-lg text-utama mt-4">Selamat ulang tahun ke-17 sayangku! 🥳</p>
-                    </div>
-                </div>
+            <div class="kartu">
+                <div class="ikon">📋</div>
+                <h3>Pembuatan CV & Daftar Riwayat Hidup</h3>
+                <p>Desain profesional, rapi, menarik untuk melamar kerja.</p>
+                <span class="harga">Mulai Rp 15.000</span>
             </div>
-            <div class="text-center mt-8">
-                <button id="lanjut-game" class="bg-white text-utama font-bold py-3 px-8 rounded-full shadow-lg opacity-0 transition-opacity duration-700 pointer-events-none">✨ Lanjut Permainan Kecil ✨</button>
+            <div class="kartu">
+                <div class="ikon">📊</div>
+                <h3>Pembuatan Presentasi</h3>
+                <p>PowerPoint/Canva yang menarik, rapi, dan mudah dipahami.</p>
+                <span class="harga">Mulai Rp 10.000/halaman</span>
+            </div>
+            <div class="kartu">
+                <div class="ikon">📑</div>
+                <h3>Pembuatan LPK / Makalah / Laporan</h3>
+                <p>Format rapi, daftar isi, sesuai standar sekolah/kantor.</p>
+                <span class="harga">Mulai Rp 20.000</span>
+            </div>
+            <div class="kartu">
+                <div class="ikon">🔄</div>
+                <h3>Ubah PDF ke Word / Excel</h3>
+                <p>Konversi file cepat dan akurat.</p>
+                <span class="harga">Mulai Rp 5.000</span>
+            </div>
+            <div class="kartu">
+                <div class="ikon">✏️</div>
+                <h3>Penyuntingan & Perapian Dokumen</h3>
+                <p>Perbaikan format, penulisan, dan tata letak dokumen Anda.</p>
+                <span class="harga">Hubungi Kami</span>
             </div>
         </div>
+    </section>
 
-        <div id="bagian-game" class="hidden w-full max-w-md mx-auto mb-10">
-            <h3 class="text-2xl font-bold text-center text-white teks-3d mb-3 font-tulisan">Tangkap Hatiku Yang Jatuh 💖</h3>
-            <p class="text-center text-white mb-4">Kumpulkan 7 buah hati agar cintaku utuh kembali padamu ya 💘</p>
-            
-            <div class="bg-white/90 rounded-3xl p-6 bayang relative overflow-hidden h-80">
-                <div class="text-center mb-3">
-                    <span class="font-bold text-utama">Terkumpul: </span>
-                    <span id="jumlah-poin" class="text-2xl font-bold text-utama">0</span> / 7 💖
-                </div>
-
-                <div id="area-tangkapan" class="relative w-full h-[220px] border-2 border-dashed border-pink-300 rounded-xl bg-pudar/20"></div>
-
-                <div id="pesan-menang" class="hidden absolute inset-0 bg-white/95 rounded-3xl p-5 flex flex-col items-center justify-center">
-                    <div class="text-6xl mb-3 lengkap">💖</div>
-                    <h4 class="text-xl font-bold text-utama font-tulisan mb-2">Berhasil Ditangkap! 💘</h4>
-                    <p class="text-gray-800 text-sm leading-relaxed text-center mb-4">
-                        Sama seperti hati-hati ini yang jatuh tepat ke pelukanmu... Begitu juga hatiku, tak akan pernah jatuh ke tempat lain selain di dalam pelukanmu selamanya Keyla 🥺🤍
-                    </p>
-                    <button id="lanjut-pohon" class="bg-utama text-white py-3 px-8 rounded-full font-bold shadow-lg">Lanjutkan 💞</button>
-                </div>
-            </div>
+    <!-- Keahlian Khusus TKJ -->
+    <section class="keahlian">
+        <h2>💻 Keahlian Khusus TKJ</h2>
+        <p style="text-align:center;">Selain jasa di atas, keahlian utama kami:</p>
+        <div class="daftar-keahlian">
+            <div class="skill">🔧 Servis Komputer</div>
         </div>
+    </section>
 
-        <div id="bagian-pohon" class="hidden w-full max-w-md mx-auto mb-10">
-            <h3 class="text-2xl font-bold text-center text-white teks-3d mb-3 font-tulisan">Pohon Janjiku Untukmu 🌳</h3>
-            <p class="text-center text-white mb-6">Sentuh batang pohon agar janjiku tumbuh satu per satu ya 💖</p>
-            <div class="bg-white/90 rounded-3xl p-6 bayang text-center">
-                <div id="pohon" class="mx-auto w-40 h-72 relative cursor-pointer" onclick="tumbuhkanJanji()">
-                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-full bg-amber-700 rounded-t-lg cabang"></div>
-                    <div class="absolute top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[50px] border-r-[50px] border-b-[60px] border-transparent border-b-pudar daun"></div>
-                    <div class="absolute top-14 left-0 w-0 h-0 border-l-[40px] border-r-[40px] border-b-[50px] border-transparent border-b-pudar daun"></div>
-                    <div class="absolute top-14 right-0 w-0 h-0 border-l-[40px] border-r-[40px] border-b-[50px] border-transparent border-b-pudar daun"></div>
-                </div>
-                <div id="daftar-janji" class="mt-6 text-left space-y-3"></div>
-                <button id="lanjut-pilihan" class="mt-6 bg-utama text-white py-3 px-8 rounded-full font-bold shadow-lg hidden">Lanjutkan 💞</button>
-            </div>
+    <!-- Cara Pesan -->
+    <section>
+        <h2>🛒 Cara Pemesanan</h2>
+        <div class="langkah">
+            <div><span>1</span> Pilih jenis jasa yang Anda butuhkan</div>
+            <div><span>2</span> Kirim file atau materi yang akan dikerjakan</div>
+            <div><span>3</span> Kami kerjakan secepat & serapi mungkin</div>
+            <div><span>4</span> Terima hasilnya, selesai! ✅</div>
         </div>
+    </section>
 
-        <div id="kotak-pilihan" class="hidden bg-white/80 backdrop-blur-sm rounded-3xl p-7 max-w-md bayang">
-            <h3 class="text-xl font-bold text-utama text-center mb-6 font-tulisan">🤍 Pilih satu untuk kita berdua 🤍</h3>
-            <div class="flex flex-col gap-5">
-                <button id="btn-benar" class="bg-gradient-to-r from-utama to-pink-500 text-white font-bold py-4 px-6 rounded-full text-lg shadow-lg transition-all duration-300 hover:scale-105">
-                    <i class="fa fa-heart mr-2"></i> AKU MAU TERUS SAMA KAMU
-                </button>
-                <button id="btn-salah" class="bg-gray-300 text-gray-400 font-bold py-4 px-6 rounded-full text-lg cursor-not-allowed relative transition-all duration-300 select-none" disabled>
-                    <i class="fa fa-times-circle mr-2"></i> AKU MAU PERGI DARI HIDUPMU
-                </button>
-            </div>
-            <p class="text-center mt-4 text-sm text-gray-500 italic">Hanya ada satu jalan yang benar untuk kita...</p>
-        </div>
+    <!-- Kontak -->
+    <section class="kotak-kontak">
+        <h2 style="color:#fff;">📩 Hubungi Kami</h2>
+        <p>Ingin pesan atau tanya-tanya dulu? Klik tombol di bawah untuk menghubungi kami lewat WhatsApp!</p>
+        <a href="https://wa.me/6283133938842" target="_blank">💬 Pesan via WhatsApp</a>
+        <p style="margin-top:1rem; font-size:.95rem;">Kami akan membalas secepat mungkin! ⏱️</p>
+    </section>
 
-        <div id="bagian-waktu" class="hidden w-full max-w-md mx-auto mb-10">
-            <div class="text-center mb-3">
-                <span class="text-2xl">📦</span>
-                <h3 class="text-2xl font-bold text-utama font-tulisan inline"> Pesan Untuk Masa Depan</h3>
-            </div>
-            <div class="bg-white rounded-3xl p-6 bayang w-full">
-                <div id="isi-waktu" class="text-gray-800 text-lg font-semibold w-full min-h-[180px] overflow-visible"></div>
-                <!-- ✅ TEKS TOMBOL SUDAH DIGANTI -->
-                <button id="lanjut-foto" class="mt-6 w-full bg-utama text-white py-4 rounded-full font-bold text-lg">Foto Foto Lucu Kamu dan Aku 📸</button>
-            </div>
-        </div>
+</div>
 
-        <div id="tempat-foto" class="hidden mt-12 w-full max-w-4xl">
-            <div class="space-y-8">
-                <div class="bingkai-foto">
-                    <img src="foto2.jpeg" alt="wanita terlucu" class="w-full h-64 object-cover">
-                    <div class="bg-pinkbg py-3 text-center">
-                        <p class="font-tulisan text-utama text-xl font-bold">Wanita Kuat Dan Sangat Baik 📸</p>
-                    </div>
-                </div>
-                <div class="bingkai-foto">
-                    <img src="foto9.jpeg" alt="pacar kamu" class="w-full h-64 object-cover">
-                    <div class="bg-pinkbg py-3 text-center">
-                        <p class="font-tulisan text-utama text-xl font-bold">Aku Akan Selalu Ada Untuk Mu💖</p>
-                    </div>
-                </div>
-                <div class="bingkai-foto">
-                    <img src="foto5.jpeg" alt="Senyuman kamu" class="w-full h-64 object-cover">
-                    <div class="bg-pinkbg py-3 text-center">
-                        <p class="font-tulisan text-utama text-xl font-bold">Kamu Adalah Wanita Terbaik Yang Aku Temui ✨</p>
-                    </div>
-                </div>
-            </div>
+<footer>
+    © 2026 Jasa & Keahlian TKJ — Semua Layanan Dikerjakan dengan Teliti & Sepenuh Hati ❤️
+</footer>
 
-            <div class="mt-12 bg-white rounded-3xl p-8 text-center bayang">
-                <span class="text-4xl">💖</span>
-                <div id="penutup" class="mt-4 text-[clamp(1.8rem,6vw,2.5rem)] font-bold text-utama font-tulisan leading-relaxed w-full overflow-visible"></div>
-                <div class="mt-4 text-4xl">🤞 ❤️</div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const wadah = document.getElementById('lapisan-hiasan');
-        const wadahHujan = document.getElementById('wadah-hujan');
-        const layarIntro = document.getElementById('layar-intro');
-        const tombolMulai = document.getElementById('tombol-mulai');
-        const isiUtama = document.getElementById('isi-utama');
-        const wadahUcapan = document.getElementById('wadah-ucapan');
-        const lanjutGame = document.getElementById('lanjut-game');
-        const bagianGame = document.getElementById('bagian-game');
-        const bagianPohon = document.getElementById('bagian-pohon');
-        const bagianWaktu = document.getElementById('bagian-waktu');
-        const kotakPilihan = document.getElementById('kotak-pilihan');
-        const tempatFoto = document.getElementById('tempat-foto');
-
-        let janjiDaftar = [
-            "💖 Aku akan selalu ada untuk mu kapanpun",
-            "💖 Akan selalu ada waktu untuk mendengarkan ceritamu",
-            "💖 Aku akan menjadi laki laki yang terbaik untukmu",
-            "💖 Meskipun kita ldr tapi aku usahakn untuk bertemu",
-            "💖 Aku akan selalu membuat mu bahagia"
-        ], idxJanji = 0;
-
-        function buatHati() {
-            const h = document.createElement('div');
-            h.className = 'hiasan-hati text-2xl';
-            h.style.left = Math.random()*100 + 'vw';
-            h.style.animationDuration = (10 + Math.random()*8) + 's';
-            h.innerText = ['❤️','💕','💖','💝','💘'][Math.floor(Math.random()*5)];
-            wadah.appendChild(h);
-            setTimeout(()=> h.remove(), 18000);
-        }
-        setInterval(buatHati, 800); for(let i=0; i<15; i++) buatHati();
-
-        function hujanHatiEmas() {
-            for(let i=0; i<60; i++){
-                setTimeout(()=>{
-                    const el = document.createElement('div');
-                    el.className = 'hujan';
-                    el.style.left = Math.random()*100 + '%';
-                    el.style.color = Math.random()>0.5?'#FFD700':'#FF3E78';
-                    el.style.animationDuration = (4+Math.random()*5)+'s';
-                    el.innerText = ['💖','✨','💝','💕','⭐'][Math.floor(Math.random()*5)];
-                    wadahHujan.appendChild(el);
-                    setTimeout(()=>el.remove(),9000);
-                }, i*80);
+<script>
+    const kartu = document.querySelectorAll('.kartu, .skill');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if(e.isIntersecting){
+                e.target.style.opacity = '1';
+                e.target.style.transform = 'translateY(0)';
             }
-        }
-
-        tombolMulai.addEventListener('click', ()=>{
-            layarIntro.classList.add('hilang-layar');
-            setTimeout(()=>{ layarIntro.style.display='none'; isiUtama.style.opacity='1'; },800);
         });
+    }, {threshold:.1});
 
-        let kadoTerbuka = 0;
-        function bukaKado(el) {
-            const kado = el, isi = el.nextElementSibling;
-            kado.classList.add('kado-terbuka');
-            setTimeout(()=>{ isi.classList.remove('hidden'); isi.classList.add('isi-muncul'); },400);
-            if(++kadoTerbuka===4) setTimeout(()=>{ lanjutGame.style.opacity='1'; lanjutGame.style.pointerEvents='auto'; },600);
-        }
+    kartu.forEach(k => {
+        k.style.opacity = '0';
+        k.style.transform = 'translateY(30px)';
+        k.style.transition = 'all .6s ease';
+        observer.observe(k);
+    });
+</script>
 
-        lanjutGame.addEventListener('click', ()=>{ wadahUcapan.classList.add('hidden'); bagianGame.classList.remove('hidden'); mulaiGameTangkap(); });
-
-        let poin = 0;
-        const poinTarget = 7;
-        let jalanGame;
-
-        function mulaiGameTangkap(){
-            poin = 0;
-            idxJanji = 0;
-            document.getElementById('jumlah-poin').innerText = '0';
-            document.getElementById('area-tangkapan').innerHTML = '';
-            document.getElementById('pesan-menang').classList.add('hidden');
-            jalanGame = setInterval(()=>{
-                if(poin >= poinTarget) { clearInterval(jalanGame); return; }
-                buatHatiJatuh();
-            }, 900);
-        }
-
-        function buatHatiJatuh(){
-            const area = document.getElementById('area-tangkapan');
-            const hati = document.createElement('div');
-            const ukuran = 32 + Math.random()*16;
-            hati.className = 'jatuh absolute';
-            hati.style.left = (5 + Math.random()*80) + '%';
-            hati.style.fontSize = ukuran + 'px';
-            hati.style.animationDuration = (2.5 + Math.random()) + 's';
-            hati.innerText = ['💖','💕','💝','💘'][Math.floor(Math.random()*4)];
-
-            hati.addEventListener('click', ()=>{
-                hati.style.animation = 'ambil 0.3s ease forwards';
-                poin++;
-                document.getElementById('jumlah-poin').innerText = poin;
-                if(poin >= poinTarget){
-                    clearInterval(jalanGame);
-                    setTimeout(()=> document.getElementById('pesan-menang').classList.remove('hidden'), 400);
-                }
-                setTimeout(()=> hati.remove(), 300);
-            });
-
-            area.appendChild(hati);
-            setTimeout(()=> hati.remove(), 4000);
-        }
-
-        document.getElementById('lanjut-pohon').addEventListener('click', ()=>{ bagianGame.classList.add('hidden'); bagianPohon.classList.remove('hidden'); });
-
-        function tumbuhkanJanji() {
-            const pohon = document.getElementById('pohon'), daftar = document.getElementById('daftar-janji');
-            daftar.innerHTML = '';
-            pohon.querySelector('.cabang').classList.add('tumbuh');
-            pohon.querySelectorAll('.daun').forEach(d=>d.classList.add('muncul-daun'));
-            const tampilJanji = ()=>{
-                if(idxJanji<janjiDaftar.length){
-                    const p = document.createElement('p'); p.className='text-sm text-gray-800 font-bold animate-pulse'; p.innerText=janjiDaftar[idxJanji++]; daftar.appendChild(p); setTimeout(tampilJanji, 1200);
-                } else setTimeout(()=>document.getElementById('lanjut-pilihan').classList.remove('hidden'), 500);
-            }; setTimeout(tampilJanji, 1000);
-        }
-
-        document.getElementById('lanjut-pilihan').addEventListener('click', ()=>{ bagianPohon.classList.add('hidden'); kotakPilihan.classList.remove('hidden'); });
-
-        const btnBenar = document.getElementById('btn-benar'), btnSalah = document.getElementById('btn-salah');
-        btnBenar.addEventListener('click', ()=>{ kotakPilihan.classList.add('hidden'); bagianWaktu.classList.remove('hidden'); mulaiKetikWaktu(); });
-        let geser=0; btnSalah.addEventListener('mouseenter', ()=>{geser+=150;if(geser>innerWidth/2)geser=-150;btnSalah.style.transform=`translateX(${geser}px)`;});
-        btnSalah.addEventListener('mouseleave', ()=>setTimeout(()=>{btnSalah.style.transform='';geser=0;},1200));
-
-        function mulaiKetikWaktu(){
-            const teks = "Kelak kita akan bertemu meskipun kita jauh dan berbeda kota, aku akan selalu mencintaimu 🥺💖";
-            const el = document.getElementById('isi-waktu');
-            el.innerHTML = '';
-            el.classList.add('ketik');
-            let i = 0;
-            const kecepatan = 70;
-            
-            const ketik = setInterval(() => {
-                if(i < teks.length){
-                    el.textContent += teks[i];
-                    i++;
-                } else {
-                    clearInterval(ketik);
-                    el.classList.remove('ketik');
-                }
-            }, kecepatan);
-        }
-
-        document.getElementById('lanjut-foto').addEventListener('click', ()=>{ bagianWaktu.classList.add('hidden'); tempatFoto.classList.remove('hidden'); hujanHatiEmas(); mulaiPenutup(); });
-
-        function mulaiPenutup(){
-            const teks = "SELAMAT ULANG TAHUN YANG KE-17 SAYANGKU 💖\nAKU SAYANG KAMU SELAMANYA 🤞❤️";
-            const el = document.getElementById('penutup');
-            el.innerHTML = '';
-            el.classList.add('ketik');
-            let i = 0;
-            const ketik = setInterval(() => {
-                if(i < teks.length){
-                    el.textContent += teks[i];
-                    i++;
-                } else {
-                    clearInterval(ketik);
-                    el.classList.remove('ketik');
-                }
-            }, 90);
-        }
-    </script>
 </body>
 </html>
