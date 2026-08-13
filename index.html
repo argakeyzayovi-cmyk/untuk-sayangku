@@ -3,169 +3,348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jasa & Keahlian TKJ | Layanan Cepat & Terpercaya</title>
+    <title>Buat Una</title>
     <style>
         *{margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;}
-        :root{--biru:#0F4C81; --biru-muda:#4A90E2; --putih:#fff; --abu:#f4f4f4; --teks:#333; --emas:#FFB800;}
-        body{background:linear-gradient(120deg,#eef2f5,#d9e2ec); color:var(--teks); line-height:1.6;}
-        header{background:linear-gradient(135deg,var(--biru),var(--biru-muda)); color:var(--putih); padding:2rem 1rem; text-align:center; position:relative; overflow:hidden;}
-        header h1{font-size:2rem; margin-bottom:.5rem; animation:muncul 1s ease-out;}
-        header p{font-size:1.1rem; opacity:.9; animation:muncul 1.2s ease-out;}
-        .gelombang{position:absolute; bottom:0; left:0; width:100%; height:60px; background:url('data:image/svg+xml;utf8,<svg viewBox=\"0 0 1200 120\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.11,126.84,141.14,200,120c48.28-13.84,90.43-46.36,121.39-63.56Z\" fill=\"%23ffffff\"></path></svg>') no-repeat center; background-size:cover;}
-        .container{max-width:1100px; margin:0 auto; padding:2rem 1rem;}
-        section{margin-bottom:3rem;}
-        h2{text-align:center; color:var(--biru); font-size:1.8rem; margin-bottom:2rem; position:relative;}
-        h2::after{content:''; width:80px; height:4px; background:var(--emas); position:absolute; bottom:-8px; left:50%; transform:translateX(-50%); border-radius:2px;}
+        :root{--pink-tua:#E91E63; --pink-utama:#FF6B9E; --pink-muda:#FFC2D8; --putih:#fff; --teks:#333; --abu-lembut:#F8F9FA;}
+        body{background:linear-gradient(180deg,#FFF0F5,#FFE4EC,#FFC2D8); color:var(--teks); min-height:100vh;}
 
-        /* Tentang */
-        .tentang{background:var(--putih); padding:2rem; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,.08); text-align:center;}
-        .tentang p{max-width:700px; margin:0 auto; font-size:1.05rem;}
+        /* Efek Halus */
+        .menyala{animation:nyala 2s ease-in-out infinite alternate;}
+        @keyframes nyala{from{text-shadow:0 0 8px var(--pink-utama),0 0 15px var(--pink-utama);} to{text-shadow:0 0 20px var(--pink-tua),0 0 30px var(--pink-tua);}}
+        .ketik{overflow:hidden; border-right:2px solid var(--pink-tua); white-space:pre-wrap; animation:kedip 0.7s step-end infinite;}
+        @keyframes kedip{50%{border-color:transparent;}}
+        .muncul{animation:naik 0.5s ease forwards; opacity:0; transform:translateY(10px);}
+        @keyframes naik{to{opacity:1; transform:translateY(0);}}
 
-        /* Layanan */
-        .grid-layanan{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem;}
-        .kartu{background:var(--putih); border-radius:14px; padding:1.8rem; box-shadow:0 6px 16px rgba(0,0,0,.08); transition:all .3s ease; border-top:4px solid var(--biru-muda); cursor:pointer;}
-        .kartu:hover{transform:translateY(-8px); box-shadow:0 10px 25px rgba(15,76,129,.15); border-top-color:var(--emas);}
-        .kartu h3{color:var(--biru); margin-bottom:.8rem; font-size:1.2rem;}
-        .kartu .ikon{font-size:2.2rem; margin-bottom:.5rem;}
-        .harga{display:inline-block; margin-top:.8rem; background:var(--emas); color:#222; padding:.3rem .8rem; border-radius:20px; font-weight:bold; font-size:.95rem;}
+        /* Tata Letak Rapi */
+        .halaman{width:100%; max-width:600px; margin:0 auto; padding:40px 24px; opacity:0; transition:all 0.3s ease; display:none; min-height:100vh;}
+        .halaman.aktif{opacity:1; display:block;}
+        .halaman-awal{display:flex; flex-direction:column; align-items:center; text-align:center; gap:36px; padding-top:60px; padding-bottom:40px;}
+        .halaman-awal h1{font-size:3rem; color:var(--pink-tua);}
+        .halaman-awal p{font-size:1.25rem; color:#555; line-height:1.8; padding:0 15px;}
 
-        /* Keahlian TKJ */
-        .keahlian{background:var(--putih); border-radius:16px; padding:2rem; box-shadow:0 4px 12px rgba(0,0,0,.08); text-align:center;}
-        .daftar-keahlian{margin-top:1.5rem;}
-        .skill{background:linear-gradient(135deg,#eaf4ff,#dcecf9); padding:1.2rem 2rem; border-radius:10px; display:inline-block; font-weight:600; font-size:1.1rem; color:var(--biru);}
-
-        /* Cara Pesan */
-        .langkah{display:flex; flex-direction:column; gap:1rem; margin-top:1rem;}
-        .langkah div{background:var(--putih); padding:1rem; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,.06);}
-        .langkah span{display:inline-block; width:30px; height:30px; line-height:30px; text-align:center; background:var(--biru); color:#fff; border-radius:50%; margin-right:.8rem; font-weight:bold;}
-
-        /* Kontak */
-        .kotak-kontak{background:linear-gradient(135deg,var(--biru),var(--biru-muda)); color:#fff; padding:2rem; border-radius:16px; text-align:center;}
-        .kotak-kontak a{display:inline-block; background:#25D366; color:#fff; padding:.8rem 1.8rem; border-radius:30px; text-decoration:none; font-weight:bold; margin-top:1rem; transition:.3s;}
-        .kotak-kontak a:hover{background:#1fb958; transform:scale(1.05);}
-
-        footer{text-align:center; padding:1.2rem; color:#555; font-size:.95rem; margin-top:2rem;}
-
-        @keyframes muncul{from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);}}
-
-        /* Responsif HP */
-        @media(max-width:600px){
-            header h1{font-size:1.5rem;}
-            h2{font-size:1.4rem;}
+        .btn-mulai{
+            background:linear-gradient(90deg,var(--pink-tua),var(--pink-utama));
+            color:white; border:none; padding:18px 60px;
+            font-size:1.25rem; border-radius:50px; cursor:pointer;
+            transition:0.3s; box-shadow:0 6px 20px rgba(233,30,99,0.35);
+            font-weight:600; width:100%; max-width:320px;
         }
+        .btn-mulai:hover{transform:scale(1.05);}
+
+        .kotak{background:white; padding:24px; border-radius:16px; box-shadow:0 4px 15px rgba(233,30,99,0.12); margin-bottom:24px; border-left:5px solid var(--pink-utama);}
+        .kotak h3{color:var(--pink-tua); margin-bottom:18px; text-align:center; font-size:1.3rem;}
+        .kotak p{font-size:1.05rem; line-height:1.8; color:#444; text-align:center;}
+
+        .grup-tombol{display:flex; flex-wrap:wrap; gap:16px; justify-content:center; align-items:center; width:100%;}
+        .tombol{
+            background:var(--pink-utama); color:white; border:none;
+            padding:12px 20px; border-radius:10px; cursor:pointer;
+            transition:0.2s; font-size:1rem; font-weight:500;
+            min-width:130px; text-align:center;
+        }
+        .tombol:hover{background:var(--pink-tua); transform:translateY(-2px);}
+        .tombol.abu{background:var(--abu-lembut); color:var(--teks); border:1px solid var(--pink-tua);}
+        .hasil{font-weight:bold; color:var(--pink-tua); margin-top:16px; text-align:center; font-size:1.1rem;}
+
+        .navigasi{display:flex; gap:16px; justify-content:center; margin-top:30px; flex-wrap:wrap;}
+        .btn-nav{
+            background:transparent; border:2px solid var(--pink-tua);
+            color:var(--pink-tua); padding:10px 22px; border-radius:10px; cursor:pointer; transition:0.2s; font-size:1rem; font-weight:500;
+            min-width:110px; text-align:center;
+        }
+        .btn-nav:hover{background:var(--pink-tua); color:white;}
+
+        /* GAME 1: SUSUN HATI (HARUS PENUH BARU MUNCUL) */
+        .papan-hati{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; max-width:300px; margin:20px auto;}
+        .kotak-hati{width:100%; aspect-ratio:1/1; background:#f8d7e3; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:32px; cursor:pointer; transition:0.2s; border:2px dashed var(--pink-utama);}
+        .kotak-hati.isi{background:var(--pink-utama); color:white; border:2px solid var(--pink-tua);}
+
+        /* GAME 2: TEBAK WARNA RASA */
+        .pilihan-warna{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; max-width:280px; margin:20px auto;}
+        .kotak-warna{width:100%; aspect-ratio:1/1; border-radius:12px; cursor:pointer; transition:0.2s; border:3px solid transparent;}
+        .kotak-warna:hover{transform:scale(1.08);}
+        .kotak-warna.pilih{border-color:var(--teks); box-shadow:0 0 15px rgba(0,0,0,0.2);}
+
+        /* GAME 3: SUSUN KATA */
+        .papan-kata{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin:20px auto; max-width:350px;}
+        .huruf{background:var(--pink-muda); color:var(--pink-tua); padding:12px 18px; border-radius:8px; cursor:pointer; transition:0.2s; font-weight:bold; font-size:1.2rem; user-select:none;}
+        .huruf.terpakai{background:var(--pink-tua); color:white; opacity:0.6; cursor:not-allowed;}
+        .kotak-jawab{display:flex; gap:8px; justify-content:center; margin-bottom:16px; min-height:40px;}
+        .tempat{width:35px; height:40px; border-bottom:2px solid var(--pink-tua); text-align:center; font-size:1.5rem; font-weight:bold; color:var(--pink-tua);}
+
+        /* GAME 4: PILIH PERASAAN */
+        .daftar-pilih{display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; max-width:350px; margin:20px auto;}
+        .item-pilih{padding:14px; border:1px solid var(--pink-tua); border-radius:10px; text-align:center; cursor:pointer; transition:0.2s;}
+        .item-pilih:hover{background:var(--pink-muda);}
+        .item-pilih.benar{background:var(--pink-tua); color:white; border-color:var(--pink-tua);}
+
+        /* GAME 5: SKALA SAYANG */
+        .konten-skala{width:90%; max-width:320px; margin:20px auto;}
+        .garis-skala{width:100%; height:18px; background:#eee; border-radius:10px; overflow:hidden; margin-bottom:10px;}
+        .isi-skala{height:100%; width:0%; background:linear-gradient(90deg,var(--pink-tua),var(--pink-utama)); transition:width 0.5s ease;}
+        .tombol-skala{display:flex; justify-content:space-between; margin-top:10px;}
+        .tombol-skala button{background:transparent; border:none; color:var(--pink-tua); font-size:1.2rem; cursor:pointer; font-weight:bold;}
+
+        /* LAINNYA */
+        .baris-bintang{font-size:28px; text-align:center; margin:16px 0; cursor:pointer;}
+        .baris-bintang span{margin:0 6px; transition:0.2s;}
+        .baris-bintang span.pilih{color:var(--pink-tua);}
+        .kotak-angka{display:grid; grid-template-columns:repeat(5, 1fr); gap:14px; max-width:280px; margin:18px auto;}
+        .kotak-angka div{background:var(--abu-lembut); padding:12px; border-radius:8px; text-align:center; cursor:pointer; transition:0.2s; border:1px solid #ddd; font-size:1.1rem; font-weight:500;}
+        .kotak-angka div.terpilih{background:var(--pink-tua); color:white;}
+        .daftar-isi{text-align:left; padding-left:28px; line-height:1.8; font-size:1rem;}
+        .daftar-isi li{margin-bottom:10px; color:#444; cursor:pointer; transition:0.2s; list-style-type:'💖 '; padding-left:5px;}
+        .daftar-isi li:hover{color:var(--pink-tua); padding-left:8px;}
     </style>
 </head>
 <body>
 
-<header>
-    <h1>🔧 Jasa & Keahlian TKJ</h1>
-    <p>Layanan Pengetikan • Pembuatan Dokumen • Jaringan & Komputer</p>
-    <div class="gelombang"></div>
-</header>
-
-<div class="container">
-
-    <!-- Tentang Kami -->
-    <section class="tentang">
-        <h2>Tentang Kami</h2>
-        <p>Kami adalah kelompok lulusan jurusan <strong>TKJ (Teknik Komputer dan Jaringan)</strong>, siap membantu Anda dengan berbagai kebutuhan dokumen dan pekerjaan teknis komputer. Cepat, rapi, teliti, dan harga terjangkau! 💻✨</p>
-    </section>
-
-    <!-- Layanan Jasa -->
-    <section>
-        <h2>📝 Layanan Pengetikan & Dokumen</h2>
-        <div class="grid-layanan">
-            <div class="kartu">
-                <div class="ikon">📄</div>
-                <h3>Pengetikan Umum</h3>
-                <p>Ketik ulang tulisan tangan, foto, PDF ke Word/Excel. Rapi dan sesuai format.</p>
-                <span class="harga">Mulai Rp 5.000/halaman</span>
-            </div>
-            <div class="kartu">
-                <div class="ikon">📋</div>
-                <h3>Pembuatan CV & Daftar Riwayat Hidup</h3>
-                <p>Desain profesional, rapi, menarik untuk melamar kerja.</p>
-                <span class="harga">Mulai Rp 15.000</span>
-            </div>
-            <div class="kartu">
-                <div class="ikon">📊</div>
-                <h3>Pembuatan Presentasi</h3>
-                <p>PowerPoint/Canva yang menarik, rapi, dan mudah dipahami.</p>
-                <span class="harga">Mulai Rp 10.000/halaman</span>
-            </div>
-            <div class="kartu">
-                <div class="ikon">📑</div>
-                <h3>Pembuatan LPK / Makalah / Laporan</h3>
-                <p>Format rapi, daftar isi, sesuai standar sekolah/kantor.</p>
-                <span class="harga">Mulai Rp 20.000</span>
-            </div>
-            <div class="kartu">
-                <div class="ikon">🔄</div>
-                <h3>Ubah PDF ke Word / Excel</h3>
-                <p>Konversi file cepat dan akurat.</p>
-                <span class="harga">Mulai Rp 5.000</span>
-            </div>
-            <div class="kartu">
-                <div class="ikon">✏️</div>
-                <h3>Penyuntingan & Perapian Dokumen</h3>
-                <p>Perbaikan format, penulisan, dan tata letak dokumen Anda.</p>
-                <span class="harga">Hubungi Kami</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Keahlian Khusus TKJ -->
-    <section class="keahlian">
-        <h2>💻 Keahlian Khusus TKJ</h2>
-        <p style="text-align:center;">Selain jasa di atas, keahlian utama kami:</p>
-        <div class="daftar-keahlian">
-            <div class="skill">🔧 Servis Komputer</div>
-        </div>
-    </section>
-
-    <!-- Cara Pesan -->
-    <section>
-        <h2>🛒 Cara Pemesanan</h2>
-        <div class="langkah">
-            <div><span>1</span> Pilih jenis jasa yang Anda butuhkan</div>
-            <div><span>2</span> Kirim file atau materi yang akan dikerjakan</div>
-            <div><span>3</span> Kami kerjakan secepat & serapi mungkin</div>
-            <div><span>4</span> Terima hasilnya, selesai! ✅</div>
-        </div>
-    </section>
-
-    <!-- Kontak -->
-    <section class="kotak-kontak">
-        <h2 style="color:#fff;">📩 Hubungi Kami</h2>
-        <p>Ingin pesan atau tanya-tanya dulu? Klik tombol di bawah untuk menghubungi kami lewat WhatsApp!</p>
-        <a href="https://wa.me/6283133938842" target="_blank">💬 Pesan via WhatsApp</a>
-        <p style="margin-top:1rem; font-size:.95rem;">Kami akan membalas secepat mungkin! ⏱️</p>
-    </section>
-
+<!-- HALAMAN AWAL -->
+<div class="halaman halaman-awal aktif" id="h1">
+    <h1 class="menyala">Hai Una 👋</h1>
+    <p>Ada banyak hal spesial yang sudah aku siapkan khusus buat kamu</p>
+    <button class="btn-mulai" onclick="bukaHalaman(2)">Mulai Perjalanan 💖</button>
+    <div class="grup-tombol">
+        <button class="tombol" onclick="tampilPesan('Sapaan Hangat: Hai Una, semoga harimu selalu menyenangkan ya')">Sapaan Hangat</button>
+        <button class="tombol" onclick="tampilPesan('Kejutan Kecil: Setiap detik yang berlalu, rasaku makin besar untukmu')">Kejutan Kecil</button>
+        <button class="tombol" onclick="tampilPesan('Senyum Dulu: Senyummu adalah hal terindah yang pernah kulihat')">Senyum Dulu</button>
+        <button class="tombol" onclick="tampilPesan('Siap Menerima: Apapun jawabanmu, aku akan menerimanya dengan lapang dada')">Siap Menerima</button>
+        <button class="tombol" onclick="tampilPesan('Dari Hati: Semua ini tulus aku sampaikan dari lubuk hati yang paling dalam')">Dari Hati</button>
+    </div>
+    <div class="hasil" id="pesanUtama"></div>
 </div>
 
-<footer>
-    © 2026 Jasa & Keahlian TKJ — Semua Layanan Dikerjakan dengan Teliti & Sepenuh Hati ❤️
-</footer>
+<div class="halaman" id="h2">
+    <div class="kotak muncul">
+        <h2 class="menyala">Buat Kamu Una</h2>
+        <p id="t1" class="ketik"></p>
+        <p id="t2" class="ketik"></p>
+        <p id="t3" class="ketik"></p>
+    </div>
+    <div class="kotak muncul">
+        <h3>📌 Pilih Kata</h3>
+        <div class="grup-tombol">
+            <button class="tombol" onclick="tampilPesan('Kamu itu sangat berharga bagiku')">Berharga</button>
+            <button class="tombol" onclick="tampilPesan('Kamu adalah satu-satunya')">Satu-satunya</button>
+            <button class="tombol" onclick="tampilPesan('Kamu membawa kebahagiaan')">Bahagia</button>
+            <button class="tombol" onclick="tampilPesan('Kamu adalah anugerah')">Anugerah</button>
+            <button class="tombol" onclick="tampilPesan('Kamu selalu ada di doaku')">Doaku</button>
+        </div>
+    </div>
+    <div class="navigasi"><button class="btn-nav" onclick="bukaHalaman(1)">⬅</button><button class="btn-nav" onclick="bukaHalaman(3)">➡ Game 1</button></div>
+</div>
+
+<div class="halaman" id="h3">
+    <div class="kotak muncul">
+        <h3>🎮 Isi Penuh Hatiku</h3>
+        <p>Klik semua kotak sampai terisi penuh, baru akan terungkap pesannya</p>
+        <div class="papan-hati" id="papanHati"></div>
+        <div class="hasil" id="hasilGame"></div>
+    </div>
+    <div class="kotak muncul">
+        <div class="grup-tombol">
+            <button class="tombol abu" onclick="mulaiGame()">Ulang Main</button>
+            <button class="tombol" onclick="bukaHalaman(4)">Lanjut Game 2</button>
+        </div>
+    </div>
+    <div class="navigasi"><button class="btn-nav" onclick="bukaHalaman(2)">⬅</button><button class="btn-nav" onclick="bukaHalaman(4)">➡</button></div>
+</div>
+
+<div class="halaman" id="h4">
+    <div class="kotak muncul">
+        <h3>🎨 Pilih Warna Rasa</h3>
+        <p>Warna mana yang paling menggambarkan perasaanmu saat ini?</p>
+        <div class="pilihan-warna" id="pilihWarna">
+            <div class="kotak-warna" style="background:#FF6B9E;" onclick="pilihWarna(this,'Merah Muda: Rasa sayang yang hangat dan tulus')"></div>
+            <div class="kotak-warna" style="background:#FFC2D8;" onclick="pilihWarna(this:'Merah Pucat: Rasa malu namun tak ingin sembunyikan')"></div>
+            <div class="kotak-warna" style="background:#E91E63;" onclick="pilihWarna(this,'Merah Tua: Cinta yang teguh dan tak goyah')"></div>
+            <div class="kotak-warna" style="background:#F48FB1;" onclick="pilihWarna(this,'Merah Lembut: Kasih sayang yang menenangkan')"></div>
+            <div class="kotak-warna" style="background:#FF4081;" onclick="pilihWarna(this,'Merah Terang: Rasa bahagia saat bersamamu')"></div>
+            <div class="kotak-warna" style="background:#FCE4EC;" onclick="pilihWarna(this,'Putih Merah: Kesucian niat menyayangimu')"></div>
+        </div>
+        <div class="hasil" id="hasilWarna"></div>
+    </div>
+    <div class="kotak muncul">
+        <h3>📝 Susun Kata Cinta</h3>
+        <p>Susun huruf ini menjadi kata yang benar: <b>S A Y A N G</b></p>
+        <div class="kotak-jawab" id="tempatJawab"></div>
+        <div class="papan-kata" id="papanHuruf"></div>
+        <div class="hasil" id="hasilKata"></div>
+    </div>
+    <div class="navigasi"><button class="btn-nav" onclick="bukaHalaman(3)">⬅</button><button class="btn-nav" onclick="bukaHalaman(5)">➡ Game 3</button></div>
+</div>
+
+<div class="halaman" id="h5">
+    <div class="kotak muncul">
+        <h3>💖 Seberapa Besar?</h3>
+        <p>Geser untuk melihat seberapa besar rasaku padamu</p>
+        <div class="konten-skala">
+            <div class="garis-skala"><div class="isi-skala" id="garis"></div></div>
+            <div class="tombol-skala">
+                <button onclick="geserSkala(25)">Sedikit</button>
+                <button onclick="geserSkala(50)">Sedang</button>
+                <button onclick="geserSkala(75)">Besar</button>
+                <button onclick="geserSkala(100)">Penuh</button>
+            </div>
+        </div>
+        <div class="hasil" id="hasilSkala"></div>
+    </div>
+    <div class="kotak muncul">
+        <h3>🤔 Pilih Perasaan yang Tepat</h3>
+        <div class="daftar-pilih">
+            <div class="item-pilih" onclick="salahPilih(this)">Hanya sekadar kenal</div>
+            <div class="item-pilih" onclick="benarPilih(this)">Menyukaimu dengan tulus</div>
+            <div class="item-pilih" onclick="salahPilih(this)">Hanya teman biasa</div>
+            <div class="item-pilih" onclick="salahPilih(this)">Tidak ada rasa</div>
+        </div>
+        <div class="hasil" id="hasilPilih"></div>
+    </div>
+    <div class="navigasi"><button class="btn-nav" onclick="bukaHalaman(4)">⬅</button><button class="btn-nav" onclick="bukaHalaman(6)">➡ Terakhir</button></div>
+</div>
+
+<div class="halaman" id="h6">
+    <div class="kotak muncul">
+        <h3>⭐ Berikan Penilaian</h3>
+        <p>Seberapa besar perasaan yang kamu rasakan dariku?</p>
+        <div class="baris-bintang" id="bintang">
+            <span onclick="beriBintang(1)">☆</span>
+            <span onclick="beriBintang(2)">☆</span>
+            <span onclick="beriBintang(3)">☆</span>
+            <span onclick="beriBintang(4)">☆</span>
+            <span onclick="beriBintang(5)">☆</span>
+        </div>
+        <div class="hasil" id="nilaiHasil"></div>
+    </div>
+    <div class="kotak muncul">
+        <h3>🔢 Pilih Angka Rahasia</h3>
+        <div class="kotak-angka" id="kotakAngka"></div>
+        <div class="hasil" id="hasilAngka"></div>
+    </div>
+    <div class="kotak muncul">
+        <h3>💖 Hal yang Aku Suka</h3>
+        <ul class="daftar-isi">
+            <li onclick="tampilPesan('Caramu bicara yang sopan dan menenangkan')">Caramu berbicara</li>
+            <li onclick="tampilPesan('Sikapmu yang selalu apa adanya')">Sikapmu yang tulus</li>
+            <li onclick="tampilPesan('Senyummu yang hilangkan lelahku')">Senyummu yang indah</li>
+            <li onclick="tampilPesan('Semangatmu saat bercerita')">Semangatmu yang menyenangkan</li>
+            <li onclick="tampilPesan('Keunikanmu yang tak dimiliki orang lain')">Keunikanmu istimewa</li>
+        </ul>
+    </div>
+    <div class="kotak muncul">
+        <h3>🙏 Penutup</h3>
+        <p>Terima kasih sudah meluangkan waktu. Semoga kamu selalu bahagia dan dimudahkan segala urusan.</p>
+        <br>
+        <p style="font-weight:bold;">- Yang menyukaimu dengan tulus -</p>
+    </div>
+    <div class="grup-tombol">
+        <button class="tombol" onclick="bukaHalaman(1)">Mulai Ulang</button>
+    </div>
+    <div class="navigasi"><button class="btn-nav" onclick="bukaHalaman(5)">⬅</button></div>
+</div>
 
 <script>
-    const kartu = document.querySelectorAll('.kartu, .skill');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if(e.isIntersecting){
-                e.target.style.opacity = '1';
-                e.target.style.transform = 'translateY(0)';
+// UTAMA
+function bukaHalaman(nomor){
+    document.querySelectorAll('.halaman').forEach(h=>h.classList.remove('aktif'));
+    document.getElementById(`h${nomor}`).classList.add('aktif');
+    window.scrollTo(0,0);
+    if(nomor===2) mulaiKetik();
+    if(nomor===3) mulaiGame();
+    if(nomor===4) mulaiSusunKata();
+    if(nomor===6) buatAngka();
+}
+
+// PESAN KLIK
+function tampilPesan(teks){document.getElementById('pesanUtama').textContent=teks;}
+
+// EFEK MENGETIK
+const a1="Jujur ya Una, walau kita beda kota dan belum pernah bertemu, rasanya ada yang beda setiap kali ngobrol sama kamu.";
+const a2="Aku sadar mungkin cuma aku yang ngerasain ini, tapi aku terima dengan lapang dada.";
+const a3="Aku cuma mau menyampaikan ini biar lega, tidak perlu kamu balas, cukup kamu ketahui saja sudah cukup.";
+function mulaiKetik(){
+    document.getElementById('t1').textContent=''; document.getElementById('t2').textContent=''; document.getElementById('t3').textContent='';
+    ketik('t1',a1,0); setTimeout(()=>ketik('t2',a2,0), a1.length*35 + 500); setTimeout(()=>ketik('t3',a3,0), (a1.length+a2.length)*35 + 1000);
+}
+function ketik(id,isi,i){if(i<isi.length){document.getElementById(id).textContent+=isi[i]; setTimeout(()=>ketik(id,isi,i+1),35);}}
+
+// GAME 1: SUSUN HATI (HARUS PENUH BARU MUNCUL)
+let kotakRasa=[]; let hitungIsi=0;
+function mulaiGame(){
+    const wadah=document.getElementById('papanHati'); wadah.innerHTML=''; kotakRasa=[]; hitungIsi=0;
+    for(let i=0;i<9;i++){
+        const el=document.createElement('div'); el.className='kotak-hati'; el.textContent='?';
+        el.onclick=()=>{
+            if(el.classList.contains('isi')) return;
+            el.classList.add('isi'); el.textContent='💖'; hitungIsi++;
+            if(hitungIsi===9){
+                document.getElementById('hasilGame').textContent='Sempurna! Hatiku sudah penuh hanya untukmu Una, tidak ada ruang untuk yang lain.';
             }
-        });
-    }, {threshold:.1});
+        };
+        wadah.appendChild(el);
+    }
+    document.getElementById('hasilGame').textContent='';
+}
 
-    kartu.forEach(k => {
-        k.style.opacity = '0';
-        k.style.transform = 'translateY(30px)';
-        k.style.transition = 'all .6s ease';
-        observer.observe(k);
+// GAME 2: PILIH WARNA
+function pilihWarna(el,pesan){
+    document.querySelectorAll('.kotak-warna').forEach(w=>w.classList.remove('pilih'));
+    el.classList.add('pilih');
+    document.getElementById('hasilWarna').textContent=pesan;
+}
+
+// GAME 3: SUSUN KATA
+let hurufAcak=['S','A','Y','A','N','G']; let susunan=[];
+function mulaiSusunKata(){
+    hurufAcak.sort(()=>Math.random()-0.5);
+    const wadah=document.getElementById('papanHuruf'); wadah.innerHTML='';
+    const tempat=document.getElementById('tempatJawab'); tempat.innerHTML='';
+    susunan=[]; document.getElementById('hasilKata').textContent='';
+    hurufAcak.forEach(h=>{
+        const el=document.createElement('div'); el.className='huruf'; el.textContent=h;
+        el.onclick=()=>{
+            if(el.classList.contains('terpakai')) return;
+            el.classList.add('terpakai'); susunan.push(h);
+            const t=document.createElement('div'); t.className='tempat'; t.textContent=h; tempat.appendChild(t);
+            if(susunan.join('')==='SAYANG'){document.getElementById('hasilKata').textContent='Benar! Kamulah satu-satunya yang kusayangi.';}
+        };
+        wadah.appendChild(el);
     });
-</script>
+}
 
+// GAME 4: SKALA SAYANG
+function geserSkala(nilai){
+    document.getElementById('garis').style.width=nilai+'%';
+    const pesan=['','Sedikit saja, tapi makin hari makin besar','Cukup besar dan mulai terasa nyata','Sangat besar, hampir tak muat di hati','PENUH! Hatiku milikmu sepenuhnya Una.'];
+    document.getElementById('hasilSkala').textContent=pesan[nilai/25];
+}
+
+// GAME 5: PILIH JAWABAN
+function benarPilih(el){el.classList.add('benar'); document.getElementById('hasilPilih').textContent='Tepat sekali! Itulah yang kurasakan padamu.';}
+function salahPilih(el){el.style.opacity='0.4'; document.getElementById('hasilPilih').textContent='Belum tepat, coba pilih lagi ya.';}
+
+// BINTANG
+function beriBintang(jml){
+    const bintang=document.querySelectorAll('#bintang span'); bintang.forEach((b,i)=>b.classList.toggle('pilih', i<jml));
+    const teks=['Sedikit saja','Cukup besar','Sangat besar','Tak terukur','Selalu abadi selamanya']; 
+    document.getElementById('nilaiHasil').textContent=teks[jml-1];
+}
+
+// ANGKA & PESAN
+function buatAngka(){
+    const wadah=document.getElementById('kotakAngka'); wadah.innerHTML='';
+    const arti=['Cinta tulus tanpa pamrih','Kesabaran yang tak berbatas','Jauh namun tetap menyayangi','Semangat yang tak pernah padam','Kita akan bertemu nanti'];
+    for(let i=1;i<=5;i++){
+        const el=document.createElement('div'); el.textContent=i; 
+        el.onclick=()=>{
+            document.querySelectorAll('.kotak-angka div').forEach(x=>x.classList.remove('terpilih')); 
+            el.classList.add('terpilih'); 
+            document.getElementById('hasilAngka').textContent=arti[i-1];
+        }; 
+        wadah.appendChild(el);
+    }
+}
+</script>
 </body>
 </html>
